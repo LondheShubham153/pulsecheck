@@ -18,6 +18,8 @@ def available():
 
 
 def namespace():
+    if not available():
+        raise Unavailable()
     return (SERVICE_ACCOUNT / "namespace").read_text().strip()
 
 
