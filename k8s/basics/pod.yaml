@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: pulsecheck
-      image: trainwithshubham/pulsecheck:1.1.0
+      image: trainwithshubham/pulsecheck:1.2.0
       imagePullPolicy: IfNotPresent
       ports:
         - containerPort: 8080

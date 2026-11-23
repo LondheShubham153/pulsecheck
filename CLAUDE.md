@@ -40,5 +40,6 @@ Stateless FastAPI uptime monitor used in a 1-hour beginner Kubernetes masterclas
 - Runbook and README use plain English, no dashes, no filler
 - Teach three words first: Pod, Deployment, Service. Name ReplicaSet, Scheduler and Kubelet only at the events feed
 - Manifests use the Docker Hub image name. Change it with `IMAGE=` and the three `image:` lines
+- Footer credit stays subtle: transparent `app/static/tws.png`, muted at rest, color and tooltip on hover and focus. Hover styles live only inside `@media (hover: hover)` so one tap works on phones
 - Version comes from the image build arg `APP_VERSION`, not from manifests
 - Cluster must fit a t3.medium (2 vCPU, 4 GB)
