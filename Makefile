@@ -1,7 +1,7 @@
 CLUSTER := pulsecheck
 NS := pulsecheck
 IMAGE ?= trainwithshubham/pulsecheck
-VERSION ?= 1.0.0
+VERSION ?= 1.1.0
 
 .PHONY: preflight up dev cluster build push load config deploy test run clean
 

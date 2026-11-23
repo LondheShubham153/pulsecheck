@@ -131,8 +131,8 @@ RESTARTS is now 1. Delete gives you a new pod. Crash restarts the same pod.
 Rolling update:
 
 ```
-make build load VERSION=1.0.1
-kubectl set image deploy/pulsecheck pulsecheck=trainwithshubham/pulsecheck:1.0.1
+make build load VERSION=1.1.1
+kubectl set image deploy/pulsecheck pulsecheck=trainwithshubham/pulsecheck:1.1.1
 kubectl rollout status deploy/pulsecheck
 kubectl rollout undo deploy/pulsecheck
 ```

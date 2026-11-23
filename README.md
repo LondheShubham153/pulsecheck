@@ -52,16 +52,16 @@ Then open the Traffic / Ports menu and use port 30080.
 ## Build and push your own image
 
 ```bash
-docker build -t YOU/pulsecheck:1.0.0 .
-docker run --rm -p 8888:8080 YOU/pulsecheck:1.0.0
+docker build -t YOU/pulsecheck:1.1.0 .
+docker run --rm -p 8888:8080 YOU/pulsecheck:1.1.0
 docker login
-docker push YOU/pulsecheck:1.0.0
+docker push YOU/pulsecheck:1.1.0
 ```
 
 On a Mac with Apple Silicon, build for both chip types. A plain push gives an image that Killercoda cannot run.
 
 ```bash
-docker buildx build --platform linux/amd64,linux/arm64 -t YOU/pulsecheck:1.0.0 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t YOU/pulsecheck:1.1.0 --push .
 ```
 
 `make push IMAGE=YOU/pulsecheck` does the same. Then change the three `image:` lines in `k8s/`.
@@ -93,3 +93,5 @@ flowchart LR
 - Ran it on a 3 node kind cluster with a Deployment, a Service and RBAC, and built a live view of pods and cluster events.
 
 Teaching notes are in [RUNBOOK.md](RUNBOOK.md). Released under the [MIT License](LICENSE).
+
+Made by [TrainWithShubham](https://trainwithshubham.com/?utm_source=pulsecheck-github).
