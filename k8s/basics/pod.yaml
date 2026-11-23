@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pulsecheck-basic
+  namespace: pulsecheck
+  labels:
+    app: pulsecheck-basic
+spec:
+  containers:
+    - name: pulsecheck
+      image: trainwithshubham/pulsecheck:1.0.0
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 8080

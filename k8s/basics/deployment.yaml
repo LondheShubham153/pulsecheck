@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pulsecheck-basic
+  namespace: pulsecheck
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pulsecheck-basic
+  template:
+    metadata:
+      labels:
+        app: pulsecheck-basic
+    spec:
+      containers:
+        - name: pulsecheck
+          image: trainwithshubham/pulsecheck:1.0.0

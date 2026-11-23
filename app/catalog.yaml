@@ -1,0 +1,89 @@
+services:
+  - id: github
+    name: GitHub
+    group: global
+    url: https://github.com
+    statuspage: https://www.githubstatus.com
+  - id: anthropic
+    name: Anthropic
+    group: global
+    url: https://www.anthropic.com
+    statuspage: https://status.claude.com
+  - id: openai
+    name: OpenAI
+    group: global
+    url: https://openai.com
+    statuspage: https://status.openai.com
+  - id: cloudflare
+    name: Cloudflare
+    group: global
+    url: https://www.cloudflare.com
+    statuspage: https://www.cloudflarestatus.com
+  - id: vercel
+    name: Vercel
+    group: global
+    url: https://vercel.com
+    statuspage: https://www.vercel-status.com
+  - id: discord
+    name: Discord
+    group: global
+    url: https://discord.com
+    statuspage: https://discordstatus.com
+  - id: slack
+    name: Slack
+    group: global
+    url: https://slack.com
+  - id: docker
+    name: Docker Hub
+    group: global
+    url: https://hub.docker.com
+    statuspage: https://www.dockerstatus.com
+  - id: npm
+    name: npm
+    group: global
+    url: https://registry.npmjs.org
+    statuspage: https://status.npmjs.org
+  - id: aws
+    name: AWS
+    group: global
+    url: https://aws.amazon.com
+  - id: gcp
+    name: Google Cloud
+    group: global
+    url: https://cloud.google.com
+  - id: azure
+    name: Azure
+    group: global
+    url: https://azure.microsoft.com
+  - id: razorpay
+    name: Razorpay
+    group: india
+    url: https://razorpay.com
+  - id: zerodha
+    name: Zerodha
+    group: india
+    url: https://zerodha.com
+  - id: phonepe
+    name: PhonePe
+    group: india
+    url: https://www.phonepe.com
+  - id: paytm
+    name: Paytm
+    group: india
+    url: https://paytm.com
+  - id: swiggy
+    name: Swiggy
+    group: india
+    url: https://www.swiggy.com
+  - id: flipkart
+    name: Flipkart
+    group: india
+    url: https://www.flipkart.com
+  - id: irctc
+    name: IRCTC
+    group: india
+    url: https://www.irctc.co.in
+  - id: groww
+    name: Groww
+    group: india
+    url: https://groww.in

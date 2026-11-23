@@ -1,0 +1,12 @@
+.git
+.claude
+tests
+k8s
+Makefile
+*.md
+**/__pycache__
+.pytest_cache
+.venv
+scripts
+docs
+LICENSE

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>PulseCheck</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("pulsecheck-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preload" href="/static/fonts/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/fonts/jetbrains-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+  <link rel="stylesheet" href="/static/css/pods.css">
+</head>
+<body>
+  <a class="skip" href="#grid">Skip to services</a>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>
+        <span>PulseCheck</span>
+      </div>
+      <button id="theme" class="icon-btn" type="button"></button>
+    </header>
+
+    <section id="summary" class="hero" data-state="unknown">
+      <p class="hero-status"><span class="pulse-dot" aria-hidden="true"></span><span id="updated">Checking</span></p>
+      <h1 id="summary-title" aria-live="polite">Checking services</h1>
+      <p id="summary-sub" class="hero-sub"></p>
+    </section>
+
+    <form id="check-form" class="command" role="search" novalidate>
+      <span data-icon="search"></span>
+      <label for="url" class="sr-only">Website to check</label>
+      <input id="url" type="text" inputmode="url" placeholder="Check any website" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <kbd aria-hidden="true">/</kbd>
+      <button id="check-btn" class="go" type="submit" aria-label="Check website"></button>
+    </form>
+    <p id="form-error" class="form-error" role="alert" hidden></p>
+
+    <div id="tabs" class="tabs" role="group" aria-label="Filter services">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="global" aria-pressed="false">Global</button>
+      <button type="button" data-filter="india" aria-pressed="false">India</button>
+      <button type="button" data-filter="issues" aria-pressed="false">Issues <span id="issues-count" class="tab-count" hidden>0</span></button>
+      <span id="ink" class="ink" aria-hidden="true"></span>
+    </div>
+
+    <main id="grid" class="grid" tabindex="-1"></main>
+    <p id="empty" class="empty" hidden>Nothing here. All clear.</p>
+    <p class="disclaimer">Demo only. Not affiliated with the listed companies.</p>
+  </div>
+
+  <div id="scrim" class="scrim" hidden></div>
+
+  <aside id="drawer" class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawer-name" tabindex="-1" hidden>
+    <div class="sheet-head">
+      <span id="drawer-logo" class="logo"></span>
+      <div class="sheet-title">
+        <h2 id="drawer-name"></h2>
+        <span id="drawer-host" class="mono"></span>
+        <span id="drawer-state"></span>
+      </div>
+      <button id="close" class="icon-btn" type="button" aria-label="Close details"></button>
+    </div>
+
+    <div id="metrics" class="metrics"></div>
+
+    <section class="chart-block">
+      <div class="chart-head">
+        <h3>Response time</h3>
+        <span id="chart-stats"></span>
+      </div>
+      <svg id="chart" class="chart" viewBox="0 0 300 96" preserveAspectRatio="none" role="img" aria-label="Response time history"></svg>
+      <p id="chart-empty" class="chart-empty" hidden></p>
+    </section>
+
+    <div id="served" class="served"></div>
+    <section id="official" class="official"></section>
+  </aside>
+
+  <aside id="pods" class="sheet" role="complementary" aria-labelledby="pods-title" tabindex="-1" hidden>
+    <div class="sheet-head">
+      <div class="sheet-title">
+        <h2 id="pods-title">Pods</h2>
+        <span class="mono">deployment/pulsecheck · try deleting a pod</span>
+      </div>
+      <button id="pods-close" class="icon-btn" type="button" aria-label="Close pods"></button>
+    </div>
+
+    <div class="replicas">
+      <div class="replicas-count"><b id="rep-ready">-</b><span>of <span id="rep-desired">-</span> ready</span></div>
+      <div id="slots" class="slots" aria-hidden="true"></div>
+    </div>
+
+    <ul id="pod-list" class="pod-list"></ul>
+
+    <button id="events-toggle" class="disclose spaced" type="button" aria-expanded="false" aria-controls="events-panel">
+      <span>What Kubernetes did <span id="events-new" class="tab-count" hidden></span></span>
+      <span data-icon="chevron"></span>
+    </button>
+    <div id="events-panel" class="collapse" data-open="false"><div><ol id="events" class="events"></ol></div></div>
+  </aside>
+
+  <button id="pods-tab" class="pods-tab" type="button" aria-label="Open pods" hidden>
+    <span data-icon="layers"></span>
+    <b id="pods-count">-</b>
+    <small>pods</small>
+  </button>
+
+  <div id="k8s" class="pill" data-state="ok" role="group" aria-label="Pod serving this page">
+    <span class="pill-live" aria-hidden="true"></span>
+    <span id="pod-name" class="chip mono">connecting</span>
+    <span id="pod-version" class="mono muted pill-extra">-</span>
+    <span id="k8s-note" class="pill-note" role="status" hidden>Pod restarting</span>
+    <button id="crash" class="pill-btn" type="button">
+      <span data-icon="zap"></span><span id="crash-label">Crash pod</span>
+    </button>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

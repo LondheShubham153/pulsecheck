@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pulsecheck
+  namespace: pulsecheck
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pulsecheck
+  namespace: pulsecheck
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "delete"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["list"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pulsecheck
+  namespace: pulsecheck
+subjects:
+  - kind: ServiceAccount
+    name: pulsecheck
+    namespace: pulsecheck
+roleRef:
+  kind: Role
+  name: pulsecheck
+  apiGroup: rbac.authorization.k8s.io

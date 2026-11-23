@@ -1,0 +1,45 @@
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/static/fonts/ibm-plex-sans-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/static/fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+
+  --bg: light-dark(#fafafb, #0a0c11);
+  --surface: light-dark(#ffffff, #10131a);
+  --surface-2: light-dark(#f3f4f7, #161a23);
+  --border: light-dark(#e8eaee, #1c212b);
+  --border-strong: light-dark(#d3d7df, #2d3544);
+  --text: light-dark(#0d121c, #eceff5);
+  --muted: light-dark(#667085, #8a93a6);
+  --accent: light-dark(#2f5fe0, #7c9dff);
+  --on-accent: light-dark(#ffffff, #0a1020);
+  --up: light-dark(#0b7d54, #3ddc97);
+  --degraded: light-dark(#a8530a, #f6bd3a);
+  --down: light-dark(#c4262b, #ff7b80);
+  --tile: #f3f5f9;
+  --scrim: rgb(5 8 14 / 50%);
+  --glass: color-mix(in srgb, var(--surface) 72%, transparent);
+  --shadow: light-dark(0 8px 24px rgb(15 23 41 / 8%), 0 8px 24px rgb(0 0 0 / 35%));
+  --shadow-lg: light-dark(-16px 0 40px rgb(15 23 41 / 10%), -16px 0 40px rgb(0 0 0 / 45%));
+  --shadow-float: light-dark(0 10px 32px rgb(15 23 41 / 14%), 0 10px 32px rgb(0 0 0 / 50%));
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 220ms;
+
+  --font: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
